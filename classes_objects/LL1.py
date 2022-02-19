@@ -3,6 +3,7 @@ class singly_LL(object):
         self.head = None
         self.tail = None
         self.size = 0
+
     def insert_first(self,value):
         node = Node(value)
         if self.size == 0:
@@ -12,6 +13,7 @@ class singly_LL(object):
             node.next=self.head
             self.head = node
         self.size+=1
+
     def insert_last(self,value):
         node = Node(value)
         if self.size == 0:
@@ -21,9 +23,9 @@ class singly_LL(object):
             self.tail.next=node
             self.tail = node
         self.size+=1
+
     def display(self):
         node = self.head
-        
         while(node!=None):
             print(node.value,end="->")
             node = node.next
