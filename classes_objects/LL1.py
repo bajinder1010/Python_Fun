@@ -5,20 +5,22 @@ class singly_LL(object):
         self.size = 0
     def insert_first(self,value):
         node = Node(value)
-        if self.head == None:
+        if self.size == 0:
             self.head = node
             self.tail = node
         else:
             node.next=self.head
             self.head = node
+        self.size+=1
     def insert_last(self,value):
         node = Node(value)
-        if self.head == None:
+        if self.size == 0:
             self.head = node
             self.tail = node
         else:
             self.tail.next=node
             self.tail = node
+        self.size+=1
     def display(self):
         node = self.head
         
@@ -26,6 +28,10 @@ class singly_LL(object):
             print(node.value,end="->")
             node = node.next
         print("END")
+
+    def ll_length(self):
+        print(self.size)
+
 
 
 
@@ -41,5 +47,6 @@ ll.insert_first(4)
 ll.insert_last(5)
 ll.insert_first(6)
 ll.display()
+ll.ll_length()
 
 
