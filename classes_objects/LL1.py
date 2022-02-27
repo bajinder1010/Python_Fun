@@ -83,6 +83,17 @@ class singly_LL(object):
             prev_node.next=new_node
             new_node.next=prev_next
             self.size+=1
+
+    def delete_at_index(self,index):
+        if index==0:
+            self.delete_first()
+        elif index == self.size-1:
+            self.delete_last()
+        else:
+            prev_node = self.get_node(index-1)
+            prev_node.next = prev_node.next.next
+            self.size-=1
+
         
     
     def ll_length(self):
@@ -120,6 +131,12 @@ ll.display()
 node = ll.get_node(0)
 print('Value at index 0:',node.value)
 ll.insert_at_index(99,1)
+ll.display()
+ll.ll_length()
+ll.delete_at_index(1)
+ll.display()
+ll.ll_length()
+ll.delete_at_index(3)
 ll.display()
 ll.ll_length()
 
