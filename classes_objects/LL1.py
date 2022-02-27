@@ -82,6 +82,7 @@ class singly_LL(object):
             new_node = Node(value)
             prev_node.next=new_node
             new_node.next=prev_next
+            self.size+=1
         
     
     def ll_length(self):
@@ -120,6 +121,7 @@ node = ll.get_node(0)
 print('Value at index 0:',node.value)
 ll.insert_at_index(99,1)
 ll.display()
+ll.ll_length()
 
 
 
