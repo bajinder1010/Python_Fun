@@ -28,9 +28,11 @@ class singly_LL(object):
     def display(self):
         node = self.head
         while(node!=None):
-            print(node.value,end="->")
+            if node.next!=None:
+                print(node.value,end="->")
+            else:
+                print(node.value)
             node = node.next
-        print("END")
 
     def delete_first(self):
         if self.size == 0:
@@ -97,10 +99,20 @@ class singly_LL(object):
         
     
     def ll_length(self):
-        print(self.size)
+        print('Size of linked list:',self.size)
+
+    def reverse_ll(self):
+        current = self.head
+        prev= None
+        while(current!=None):
+            next = current.next
+            current.next = prev
+            prev = current
+            current= next
+        self.head = prev
 
 
-
+            
 
 class Node(object):
     def __init__(self,value):
@@ -139,6 +151,7 @@ ll.ll_length()
 ll.delete_at_index(3)
 ll.display()
 ll.ll_length()
-
+ll.reverse_ll()
+ll.display()
 
 
