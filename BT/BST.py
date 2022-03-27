@@ -1,3 +1,6 @@
+from operator import le
+
+
 class Node(object):
     def __init__(self,value):
         self.value = value
@@ -42,6 +45,70 @@ class Tree(object):
         print(node.value)
         self.in_order(node.rightChild)
 
+    def remove(self,value):
+        current_node = self.root
+        parent_node = None
+        node_to_remove = None
+        found = False
+        while not found:
+            if (current_node==None or current_node.value==None):
+                print("node not found")
+                return
+            
+            if (value==current_node.value):
+                node_to_remove = current_node
+                found = True
+            elif value<current_node.value:
+                parent_node= current_node
+                current_node= current_node.leftChild
+            else:
+                parent_node = current_node
+                current_node = current_node.rightChild
+
+        
+        node_to_remove_is_parent_left_child = parent_node.leftChild == node_to_remove
+
+        if(node_to_remove.leftChild==None and node_to_remove.rightChild==None):
+            if node_to_remove_is_parent_left_child:
+                parent_node.leftChild=None
+            else:
+                parent_node.rightChild=None
+        elif(node_to_remove.leftChild != None and  node_to_remove.rightChild == None):
+            if node_to_remove_is_parent_left_child :
+                parent_node.leftChild = node_to_remove.leftChild
+            else:
+                parent_node.rightChild = node_to_remove.leftChild
+        elif(node_to_remove.rightChild != None and node_to_remove.leftChild == None):
+            if node_to_remove_is_parent_left_child :
+                parent_node.leftChild = node_to_remove.rightChild
+            else:
+                parent_node.rightChild = node_to_remove.rightChild
+        else:
+            right_tree = node_to_remove.rightChild
+            left_tree = node_to_remove.leftChild
+            if node_to_remove_is_parent_left_child:
+                parent_node.leftChild = right_tree
+            else:
+                parent_node.rightChild = right_tree
+
+            current_left_node=right_tree
+            current_left_parent = None
+            found_space_left = False
+
+            while not found_space_left:
+                if current_left_node == None:
+                    found_space_left = True
+                else:
+                    current_left_parent = current_left_node
+                    current_left_node = current_left_node.leftChild
+            
+            current_left_parent.leftChild=left_tree
+            print("node sucessfully deleted")
+            return
+
+
+        
+
 
 
 tree = Tree()
@@ -54,5 +121,11 @@ tree.add_Child(9)
 tree.add_Child(10)
 tree.add_Child(6)
 tree.add_Child(12)
+print("Before Remove")
+tree.in_order(root_Node)
+#tree.remove(6)
+#tree.remove(10)
+tree.remove(11)
+print("After Remove")
 tree.in_order(root_Node)
 
