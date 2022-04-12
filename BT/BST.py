@@ -1,5 +1,3 @@
-from operator import le
-
 
 class Node(object):
     def __init__(self,value):
@@ -44,6 +42,40 @@ class Tree(object):
         self.in_order(node.leftChild)
         print(node.value)
         self.in_order(node.rightChild)
+
+    def pre_order(self,node):
+        if node==None:
+            return
+        print(node.value)
+        self.pre_order(node.leftChild)
+        self.pre_order(node.rightChild)
+
+    def post_order(self,node):
+        if node==None:
+            return
+        self.post_order(node.leftChild)
+        self.post_order(node.rightChild)
+        print(node.value)
+
+    def level_order(self,node):
+        my_queue =[]
+        my_queue.append(node)
+        ans=[]
+        while my_queue:
+            curr_list=[]
+            curr_size=len(my_queue)
+            while curr_size>0:
+                node = my_queue.pop(0)
+                curr_list.append(node.value)
+                curr_size-=1
+                print(node.value, end=' ')
+                if node.leftChild != None:
+                    my_queue.append(node.leftChild)
+                if node.rightChild != None:
+                    my_queue.append(node.rightChild)
+            
+            ans.append(curr_list)
+        print(ans)
 
     def remove(self,value):
         current_node = self.root
@@ -122,10 +154,13 @@ tree.add_Child(10)
 tree.add_Child(6)
 tree.add_Child(12)
 print("Before Remove")
-tree.in_order(root_Node)
+#tree.in_order(root_Node)
 #tree.remove(6)
 #tree.remove(10)
-tree.remove(11)
-print("After Remove")
-tree.in_order(root_Node)
-
+#tree.remove(11)
+print("After Remove Inorder")
+#tree.in_order(root_Node)
+print("After Remove PreOrder")
+#tree.pre_order(root_Node)
+#tree.post_order(root_Node)
+tree.level_order(root_Node)
