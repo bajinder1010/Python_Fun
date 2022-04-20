@@ -61,11 +61,44 @@ class Graph(object):
             graph += f"{node.__str__()}\n" 
         return graph
 
-g= Graph(False)
-g.add_node("bob")
-g.add_node("preeti")
+def Bfs(graph,start_value):
+    start_node = graph.find_node(start_value)
+    print(start_node.value)
+    visited ={}
+    for item in graph.nodes:
+        visited[item.value]=False
+    print(visited)
+    queue =[]
+    queue.append(start_node)
+    while(queue):
+        curr_node= queue.pop(0)
+        if(visited[curr_node.value]==False):
+            print(curr_node.value)
+            visited[curr_node.value]=True
+        for item in curr_node.edges:
+            if(visited[item.value]==False):
+                queue.append(item)
 
-g.add_edge("bob","preeti")
+
+g= Graph(False)
+g.add_node("5")
+g.add_node("3")
+g.add_node("7")
+g.add_node("2")
+g.add_node("4")
+g.add_node("8")
+
+
+
+g.add_edge("5","3")
+g.add_edge("5","7")
+g.add_edge("3","2")
+g.add_edge("3","4")
+g.add_edge("5","7")
+g.add_edge("7","8")
+g.add_edge("4","8")
+
+
 
 print(len(g.nodes))
 print(g.number_of_nodes())
@@ -74,5 +107,5 @@ g.number_of_edges()
 #print(len(g.nodes))
 #print(g.number_of_nodes())
 #g.number_of_edges()
-
 print(g)
+Bfs(g,"5")
