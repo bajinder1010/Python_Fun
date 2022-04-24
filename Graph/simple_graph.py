@@ -79,6 +79,23 @@ def Bfs(graph,start_value):
             if(visited[item.value]==False):
                 queue.append(item)
 
+def Dfs(graph,start_value):
+    start_node = graph.find_node(start_value)
+    #print(start_node.value)
+    visited={}
+    for item in graph.nodes:
+        visited[item.value]= False
+    
+    def exploreNode(node):
+        if(visited[node.value]==True):
+            return
+        print(node.value)
+        visited[node.value]=True
+        for item in node.edges:
+            exploreNode(item)
+    
+    exploreNode(start_node)
+
 
 g= Graph(False)
 g.add_node("5")
@@ -108,4 +125,6 @@ g.number_of_edges()
 #print(g.number_of_nodes())
 #g.number_of_edges()
 print(g)
-Bfs(g,"5")
+#Bfs(g,"5")
+print("DFS")
+Dfs(g,"5")
